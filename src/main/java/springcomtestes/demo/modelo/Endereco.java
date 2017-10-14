@@ -14,9 +14,8 @@ public class Endereco {
     private Long codigo;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_pessoa")
+    @JoinColumn(name = "pessoa")
     private Pessoa pessoa;
-
     private String logradouro;
     private Integer numero;
     private String complemento;

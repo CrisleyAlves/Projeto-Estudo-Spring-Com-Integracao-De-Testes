@@ -8,9 +8,12 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import springcomtestes.demo.modelo.Pessoa;
+import springcomtestes.demo.modelo.Telefone;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigInteger;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,7 +30,7 @@ public class PessoaRepositoryTest {
     private PessoaRepository pessoaRepository;
 
     @Test
-    public void deveProcurarPessoaPeloCpf(){
+    public void deveProcurarPessoaPeloCpf() {
         Optional<Pessoa> optional = pessoaRepository.findByCpf("18273849228");
 
         assertThat(optional.isPresent()).isTrue();
@@ -39,11 +42,42 @@ public class PessoaRepositoryTest {
     }
 
     @Test
-    public void naoDeveProcurarPessoaDeCpfExistente(){
+    public void naoDeveProcurarPessoaDeCpfExistente() {
         Optional<Pessoa> optional = pessoaRepository.findByCpf("92819203948");
         assertThat(optional.isPresent()).isFalse();
     }
 
+    @Test
+    public void deveListarTodasAsPessoas() {
+        List<Pessoa> pessoas = pessoaRepository.findAll();
+        assertThat(pessoas.size() > 0).isTrue();
+    }
 
+    @Test
+    public void deveEncontrarPessoa() {
+        Pessoa pessoa = pessoaRepository.findByCodigo(Long.parseLong("1"));
+        assertThat(pessoa.getNome()).isNotEmpty();
+    }
+
+    @Test
+    public void naoDeveEncontrarPessoa() {
+        Pessoa pessoa = pessoaRepository.findByCodigo(Long.parseLong("99999"));
+        assertThat(pessoa).isNull();
+    }
+
+    @Test
+    public void verificaPermissaoUsuarioAutorizado(){
+        Pessoa pessoa = pessoaRepository.findByNome("Iago");
+        assertThat(pessoa).isNotNull();
+        assertThat(pessoa.getPermissao()).isEqualTo(Integer.parseInt("1"));
+        assertThat(pessoa.getNome()).isEqualTo("Iago");
+    }
+
+    @Test
+    public void verificaPermissaoUsuarioNaoAutorizado(){
+        Pessoa pessoa = pessoaRepository.findByNome("Crisley");
+        assertThat(pessoa).isNotNull();
+        assertThat(pessoa.getPermissao()).isNotEqualTo(Integer.parseInt("1"));
+    }
 
 }

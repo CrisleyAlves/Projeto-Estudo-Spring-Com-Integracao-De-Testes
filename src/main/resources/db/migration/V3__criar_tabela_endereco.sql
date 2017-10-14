@@ -8,6 +8,6 @@ CREATE TABLE endereco(
   bairro VARCHAR(255),
   cidade VARCHAR(255),
   estado VARCHAR(2),
-  codigo_pessoa BIGINT NOT NULL,
-  FOREIGN KEY (codigo_pessoa) REFERENCES pessoa(codigo)
+  pessoa BIGINT NOT NULL,
+  FOREIGN KEY (pessoa) REFERENCES pessoa(codigo)
 );

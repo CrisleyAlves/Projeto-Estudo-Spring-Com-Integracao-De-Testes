@@ -14,7 +14,7 @@ public class Telefone {
     private Long codigo;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_pessoa")
+    @JoinColumn(name = "pessoa")
     private Pessoa pessoa;
 
     @Column(length = 2, nullable = false)

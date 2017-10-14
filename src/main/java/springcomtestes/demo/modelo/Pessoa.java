@@ -26,6 +26,9 @@ public class Pessoa {
     @OneToMany(mappedBy = "pessoa")
     List<Telefone> telefones;
 
+    @Column(length = 1, nullable = false)
+    Integer permissao;
+
     public Long getCodigo() {
         return codigo;
     }
@@ -64,6 +67,14 @@ public class Pessoa {
 
     public void setTelefones(List<Telefone> telefones) {
         this.telefones = telefones;
+    }
+
+    public Integer getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(Integer permissao) {
+        this.permissao = permissao;
     }
 
     @Override
