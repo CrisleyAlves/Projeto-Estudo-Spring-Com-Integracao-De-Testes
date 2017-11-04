@@ -15,4 +15,6 @@ public interface TelefoneRepository extends JpaRepository<Telefone, Long> {
 
     List<Telefone> findAllByPessoa (Pessoa pessoa);
 
+    List<Telefone> findAllByNumero (String numero);
+
 }

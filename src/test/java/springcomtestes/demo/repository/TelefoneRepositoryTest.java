@@ -27,6 +27,9 @@ public class TelefoneRepositoryTest {
     @Autowired
     private TelefoneRepository telefoneRepository;
 
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
     Pessoa pessoaTeste = new Pessoa();
 
     @Test
@@ -61,6 +64,20 @@ public class TelefoneRepositoryTest {
         assertThat(telefones).isNotNull();
         pessoaTeste.setTelefones(telefones);
         assertThat(pessoaTeste.getTelefones().size()).isGreaterThan(Integer.parseInt("0"));
+    }
+
+    @Test
+    public void garanteTelefoneDaPessoaCorreta(){
+        pessoaTeste = pessoaRepository.findByNome("Iago");
+        List<Telefone> telefones = telefoneRepository.findAllByPessoa(pessoaTeste);
+        assertThat(telefones.get(0).getPessoa()).isEqualTo(pessoaTeste);
+    }
+
+    @Test
+    public void garanteTelefoneTemUmDono(){
+        List<Telefone> telefones = telefoneRepository.findAllByNumero("11111111111");
+        assertThat(telefones.get(0).getPessoa()).isNotNull();
+        assertThat(telefones.get(0).getPessoa().getNome()).isEqualTo("Iago");
     }
 
 

@@ -3,7 +3,7 @@ INSERT INTO pessoa(nome, cpf, permissao) VALUES ('Pedro','0192837488', 0);
 INSERT INTO pessoa(nome, cpf, permissao) VALUES ('Cauê','34565432123', 0);
 INSERT INTO pessoa(nome, cpf, permissao) VALUES ('Breno','91827384759', 0);
 INSERT INTO pessoa(nome, cpf, permissao) VALUES ('Thiago','19284637289', 1);
-INSERT INTO pessoa(nome, cpf, permissao) VALUES ('Crisley','91829382910', 1);
+INSERT INTO pessoa(nome, cpf, permissao) VALUES ('Crisley','91829382910', 0);
 
 INSERT INTO telefone(ddd, numero, pessoa)
 VALUES ('11', '11111111111' , 1);

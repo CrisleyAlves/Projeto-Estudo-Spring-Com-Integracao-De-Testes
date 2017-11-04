@@ -8,13 +8,11 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import springcomtestes.demo.modelo.Pessoa;
-import springcomtestes.demo.modelo.Telefone;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Crisley Alves on 14, out, 2017
@@ -79,5 +77,21 @@ public class PessoaRepositoryTest {
         assertThat(pessoa).isNotNull();
         assertThat(pessoa.getPermissao()).isNotEqualTo(Integer.parseInt("1"));
     }
+
+    @Test
+    public void verificaUsuarioNaoDeveTerTelefone(){
+        Pessoa pessoa = pessoaRepository.findByNome("Crisley");
+        assertThat(pessoa).isNotNull();
+        assertThat(pessoa.getTelefones().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void verificaUsuarioTemPeloMenosUmTelefone(){
+        Pessoa pessoa = pessoaRepository.findByNome("Iago");
+        assertThat(pessoa).isNotNull();
+        assertThat(pessoa.getTelefones().size()).isGreaterThanOrEqualTo(1);
+    }
+
+
 
 }

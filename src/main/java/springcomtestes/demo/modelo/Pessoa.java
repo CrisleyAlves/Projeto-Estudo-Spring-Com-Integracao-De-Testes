@@ -1,5 +1,8 @@
 package springcomtestes.demo.modelo;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -24,6 +27,7 @@ public class Pessoa {
     List<Endereco> enderecos;
 
     @OneToMany(mappedBy = "pessoa")
+            @Fetch(FetchMode.SUBSELECT)
     List<Telefone> telefones;
 
     @Column(length = 1, nullable = false)
